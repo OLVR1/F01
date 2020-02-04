@@ -76,7 +76,7 @@ public class Board extends Subject {
                 active = space;
                 active.setActive(true);
                 countMoves++;
-
+//olioverrr
 
 
                 // not needed for current version; but for being clear,
