@@ -45,7 +45,6 @@ public class SpaceEventHandler implements EventHandler<ActionEvent> {
             SpaceView spaceView = (SpaceView) source;
             Space space = spaceView.space;
             if (space != null) {
-
                 Board board = space.board;
                 board.setActive(space);
                 event.consume();
