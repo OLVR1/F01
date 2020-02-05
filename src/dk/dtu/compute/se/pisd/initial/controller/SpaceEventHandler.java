@@ -46,19 +46,61 @@ public class SpaceEventHandler implements EventHandler<ActionEvent> {
             Space space = spaceView.space;
             if (space != null) {
                 Board board = space.board;
+
+                if (board.getSpace(space.x,space.y-1)==null) {  //hvis y-1 "ikke er på pladen" så bliver det muligt at rykke til "nabo" feltet
+                    moveToYAxisNeighbour(event, space, board);
+                }
+
+                if (board.getSpace(space.x,space.y+8)==null) {   //hvis y+8 "ikke er på pladen" så bliver det muligt at rykke til "nabo" feltet
+                    moveToYAxisNeighbour(event, space, board);
+                }
+
+                if (board.getSpace(space.x-1,space.y)==null){   //hvis x-1 "ikke er på pladen" så bliver det muligt at rykke til "nabo" feltet
+                    moveToXAxisNeighbour(event, space, board);
+                }
+
+                if (board.getSpace(space.x+8,space.y)==null){   //hvis x+8 "ikke er på pladen" så bliver det muligt at rykke til "nabo" feltet
+                    moveToXAxisNeighbour(event, space, board);
+                }
+
                 Space right = board.getSpace(space.x+1,space.y);
                 Space left = board.getSpace(space.x-1,space.y);
                 Space up = board.getSpace(space.x,space.y+1);
                 Space down = board.getSpace(space.x,space.y-1);
-                if ( (right != null && right.isActive()) ||
-                        (left != null && left.isActive()) ||
-                        (up != null && up.isActive()) ||
-                        (down != null && down.isActive())) {
-                    board.setActive(space);
-                    event.consume();
-                }
+
+
+                availablePositions(event, space, board, right, left, up, down);
 
             }
+
+        }
+    }
+
+    private void moveToXAxisNeighbour(ActionEvent event, Space space, Board board) {
+        Space right = board.getSpace(space.x+7,space.y);
+        Space left = board.getSpace(space.x-7,space.y);
+        Space up = board.getSpace(space.x,space.y);
+        Space down = board.getSpace(space.x,space.y);
+
+        availablePositions(event, space, board, right, left, up, down);
+    }
+
+    private void moveToYAxisNeighbour(ActionEvent event, Space space, Board board) {
+        Space right = board.getSpace(space.x, space.y + 7);
+        Space left = board.getSpace(space.x, space.y-7);
+        Space up = board.getSpace(space.x, space.y);
+        Space down = board.getSpace(space.x, space.y);
+
+        availablePositions(event, space, board, right, left, up, down);
+    }
+
+    private void availablePositions(ActionEvent event, Space space, Board board, Space right, Space left, Space up, Space down) {
+        if ((right != null && right.isActive()) ||
+                (left != null && left.isActive()) ||
+                (up != null && up.isActive()) ||
+                (down != null && down.isActive())) {
+            board.setActive(space);
+            event.consume();
         }
     }
 
