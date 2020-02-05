@@ -45,10 +45,18 @@ public class SpaceEventHandler implements EventHandler<ActionEvent> {
             SpaceView spaceView = (SpaceView) source;
             Space space = spaceView.space;
             if (space != null) {
-
                 Board board = space.board;
-                board.setActive(space);
-                event.consume();
+                Space right = board.getSpace(space.x+1,space.y);
+                Space left = board.getSpace(space.x-1,space.y);
+                Space up = board.getSpace(space.x,space.y+1);
+                Space down = board.getSpace(space.x,space.y-1);
+                if ( (right != null && right.isActive()) ||
+                        (left != null && left.isActive()) ||
+                        (up != null && up.isActive()) ||
+                        (down != null && down.isActive())) {
+                    board.setActive(space);
+                    event.consume();
+                }
 
             }
         }
