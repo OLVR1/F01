@@ -39,7 +39,6 @@ public class SpaceView extends Button implements Observer {
 
 
     public final Space space;
-    private int CountMoves = 0;
 
 
     public SpaceView(Space space) {
@@ -65,12 +64,6 @@ public class SpaceView extends Button implements Observer {
         }
     }
 
-private int getMoves() {
-        if (space != null)
-            CountMoves++;
-        return CountMoves;
-
-    }
     @Override
     public void update(Subject subject) {
         if (subject == this.space) {
