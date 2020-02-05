@@ -44,15 +44,8 @@ public class BoardView extends GridPane implements Observer {
 
     private Board board;
     private SpaceView[][] spaces;
-
-
-
     private Label label;
     private GridPane gridPane;
-
-
-
-
 
 
     public BoardView(Board board) {
@@ -101,7 +94,7 @@ public class BoardView extends GridPane implements Observer {
                 // here the view should be updated (e.g. the status line)
             } else {
                 Platform.runLater(() -> {
-                    label.setText("Moves:" + board.getCounter());
+                    label.setText("Moves:" + board.getCounter()) ;
                     // here the view should be updated (e.g. the status line)
                 });
             }
